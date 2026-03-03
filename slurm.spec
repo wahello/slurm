@@ -197,12 +197,25 @@ BuildRequires: ucx-devel
 %endif
 
 %if %{with libcurl}
-%if %{defined suse_version}
-Requires: libcurl4
-%else
+%if 0%{?rhel}
 Requires: libcurl
-%endif
 BuildRequires: libcurl-devel
+%endif
+
+%if 0%{?fedora}
+Requires: libcurl
+BuildRequires: libcurl-devel
+%endif
+
+%if 0%{?suse_version}
+Requires: libcurl
+BuildRequires: libcurl-devel
+%endif
+
+%if 0%{?debian_version}
+Requires: libcurl4
+BuildRequires: libcurl4-gnutls-dev
+%endif
 %endif
 
 %if %{with jwt}
